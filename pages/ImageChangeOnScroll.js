@@ -1,35 +1,36 @@
+import { useEffect, useState } from "react";
 import ImageToggleOnScroll from "../src/ImageToggleOnScroll";
 
 const ImageChangeOnScroll = () => {
-    return ( 
-        <div>
-            <ImageToggleOnScroll 
-            primaryImg="/bw/m3.jpg"
-            secondaryImg="/m3.jpg" alt=""
-            /><br/>
-            <ImageToggleOnScroll 
-            primaryImg="/bw/m2.jpg"
-            secondaryImg="/m2.jpg" alt=""
-            /><br/>
-            <ImageToggleOnScroll 
-            primaryImg="/bw/m3.jpg"
-            secondaryImg="/m3.jpg" alt=""
-            /><br/>
-            <ImageToggleOnScroll 
-            primaryImg="/bw/m2.jpg"
-            secondaryImg="/m2.jpg" alt=""
-            /><br/>
-            <ImageToggleOnScroll 
-            primaryImg="/bw/m3.jpg"
-            secondaryImg="/m3.jpg" alt=""
-            /><br/>
-            <ImageToggleOnScroll 
-            primaryImg="/bw/m2.jpg"
-            secondaryImg="/m2.jpg" alt=""
-            /><br/>
-        
-        </div>
-     );
-}
- 
+    const [currentSpeakerId, setCurrentSpeakerId] = useState("");
+    const [mouseEventCnt, setMouseEventCnt] = useState(0);
+    useEffect(()=>{
+        window.document.title = `Speaker ID: ${currentSpeakerId}`;
+        console.log(`useEffect: setting current speaker to ${currentSpeakerId}`)
+    });
+    return (
+    <div>
+        <span>mouseEventCnt: ${mouseEventCnt}</span>
+      {["m3", "m2", "m3", "m2", "m3", "m2", "m3", "m2"].map((id) => {
+        return (
+          <div key={id}
+            onMouseOver={()=>{
+                setCurrentSpeakerId(id);
+                setMouseEventCnt(mouseEventCnt + 1);
+                console.log(`onMouseOver:${id}`);
+            }}
+          >
+            <ImageToggleOnScroll
+              primaryImg={`/bw/${id}.jpg`}
+              secondaryImg={`/${id}.jpg`}
+              alt=""
+            />
+          </div>
+        );
+      })}
+      
+    </div>
+  );
+};
+
 export default ImageChangeOnScroll;
