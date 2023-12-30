@@ -7,7 +7,7 @@ const ImageChangeOnScroll = () => {
     useEffect(()=>{
         window.document.title = `Speaker ID: ${currentSpeakerId}`;
         console.log(`useEffect: setting current speaker to ${currentSpeakerId}`)
-    });
+    }, [currentSpeakerId]);
     return (
     <div>
         <span>mouseEventCnt: ${mouseEventCnt}</span>
